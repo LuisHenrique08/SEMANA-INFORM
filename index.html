@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* (O CSS permanece exatamente igual) */
         :root {
             --team-a-color: #3498db;
             --team-b-color: #e74c3c;
@@ -251,7 +252,7 @@
         <!-- Progresso -->
         <div class="progress-bar section pt-0">
             <progress id="quiz-progress" class="progress is-primary" value="0" max="100">0%</progress>
-            <p class="has-text-centered question-counter" id="progress-text">Pergunta 1 de 7</p>
+            <p class="has-text-centered question-counter" id="progress-text">Pergunta 1 de 10</p>
         </div>
 
         <!-- Área da Pergunta -->
@@ -259,12 +260,12 @@
             <div class="card question-card">
                 <div class="card-content">
                     <div class="tags category-tag are-medium">
-                        <span class="tag is-info" id="category">Geografia</span>
-                        <span class="tag is-warning" id="difficulty">Médio</span>
+                        <span class="tag is-info" id="category">Computação</span>
+                        <span class="tag is-warning" id="difficulty">Básica</span>
                     </div>
                     
                     <p class="title is-3 has-text-centered" id="question-text">
-                        Qual é a capital do Brasil?
+                        Qual dessas opções não é um Sistema Operacional?
                     </p>
                     
                     <div class="options-container" id="options-container">
@@ -307,66 +308,159 @@
     </div>
 
     <script>
-        // Banco de perguntas
-        const questions = [
+        // Banco de perguntas expandido (exemplo com 20 perguntas, mas pode ser expandido para 1000+)
+        const questionBank = [
             {
-                question: "Qual é a capital do Brasil?",
-                options: ["Rio de Janeiro", "Brasília", "São Paulo", "Salvador"],
-                correct: 1,
-                category: "Geografia",
-                difficulty: "Fácil"
-            },
-            {
-                question: "Quem pintou a Mona Lisa?",
-                options: ["Vincent van Gogh", "Pablo Picasso", "Leonardo da Vinci", "Michelangelo"],
-                correct: 2,
-                category: "Arte",
-                difficulty: "Médio"
-            },
-            {
-                question: "Qual é o maior planeta do sistema solar?",
-                options: ["Terra", "Marte", "Júpiter", "Saturno"],
-                correct: 2,
-                category: "Astronomia",
-                difficulty: "Fácil"
-            },
-            {
-                question: "Quantos elementos tem a tabela periódica?",
-                options: ["108", "118", "128", "138"],
-                correct: 1,
-                category: "Química",
-                difficulty: "Difícil"
-            },
-            {
-                question: "Em que ano começou a Segunda Guerra Mundial?",
-                options: ["1914", "1939", "1941", "1945"],
-                correct: 1,
-                category: "História",
-                difficulty: "Médio"
-            },
-            {
-                question: "Qual é o maior oceano do mundo?",
-                options: ["Atlântico", "Índico", "Ártico", "Pacífico"],
-                correct: 3,
-                category: "Geografia",
-                difficulty: "Fácil"
-            },
-            {
-                question: "Quem escreveu 'Dom Quixote'?",
-                options: ["Miguel de Cervantes", "William Shakespeare", "Friedrich Nietzsche", "Machado de Assis"],
+                question: "Qual dessas opções não é um Sistema Operacional?",
+                options: ["Microsoft", "LinuX", "macOS", "Windows"],
                 correct: 0,
-                category: "Literatura",
+                category: "Computação",
+                difficulty: "Fácil"
+            },
+            {
+                question: "O que significa a sigla CPU em português?",
+                options: ["Computador Pessoal de Uso", "Componente Principal do Usuário", "Unidade Central de Processamento", "Controle de Processos do Usuário"],
+                correct: 2,
+                category: "Computação",
+                difficulty: "Fácil"
+            },
+            {
+                question: "Em programação, o que é uma variável?",
+                options: ["Um erro no código", "Um tipo de hardware", "Um local na memória que armazena um valor", "Um comando de saída de dados"],
+                correct: 2,
+                category: "Programação",
+                difficulty: "Fácil"
+            },
+            {
+                question: "Qual dos elementos não é uma linguagem de programação?",
+                options: ["HTML", "JavaScript", "Java", "Python"],
+                correct: 0,
+                category: "Programação",
+                difficulty: "Fácil"
+            },
+            {
+                question: "O que significa a sigla HTML em português?",
+                options: ["Hipertexto e Marcação de Linguagem", "Linguagem de Marcação de Hipertexto", "Hardware e Tecnologia Moderna de Links", "Interface de Texto para Múltiplas Linguagens"],
+                correct: 1,
+                category: "Programação",
+                difficulty: "Fácil"
+            },
+            {
+                question: "O que é um SSD em computação?",
+                options: ["Sistema de Segurança de Dados", "Software de Supervisão Digital", "Dispositivo de Estado Sólido (Solid-State Drive)", "Servidor de Serviços Distribuídos"],
+                correct: 2,
+                category: "Computação",
+                difficulty: "Fácil"
+            },
+            {
+                question: "Qual componente é conhecido como o cérebro do computador?",
+                options: ["RAM", "CPU", "HD", "Placa-Mãe"],
+                correct: 1,
+                category: "Computação",
+                difficulty: "Fácil"
+            },
+            {
+                question: "Qual destes não é um tipo de dado primário em JavaScript?",
+                options: ["String", "Boolean", "Number", "Array"],
+                correct: 3,
+                category: "Programação",
                 difficulty: "Médio"
+            },
+            {
+                question: "Qual protocolo é usado para enviar e-mails?",
+                options: ["HTTP", "FTP", "SMTP", "SSH"],
+                correct: 2,
+                category: "Redes",
+                difficulty: "Médio"
+            },
+            {
+                question: "O que é um firewall?",
+                options: ["Um sistema de aquecimento", "Um dispositivo de segurança de rede", "Um tipo de vírus", "Um software de edição de texto"],
+                correct: 1,
+                category: "Segurança",
+                difficulty: "Médio"
+            },
+            {
+                question: "Qual destes é um banco de dados NoSQL?",
+                options: ["MySQL", "PostgreSQL", "MongoDB", "Oracle"],
+                correct: 2,
+                category: "Banco de Dados",
+                difficulty: "Médio"
+            },
+            {
+                question: "O que significa a sigla VPN?",
+                options: ["Virtual Private Network", "Visual Programming Network", "Video Processing Node", "Virtual Protocol Number"],
+                correct: 0,
+                category: "Redes",
+                difficulty: "Médio"
+            },
+            {
+                question: "Qual linguagem de programação foi criada por Guido van Rossum?",
+                options: ["Java", "Python", "C++", "Ruby"],
+                correct: 1,
+                category: "Programação",
+                difficulty: "Médio"
+            },
+            {
+                question: "O que é um algoritmo?",
+                options: ["Um tipo de hardware", "Um conjunto de instruções para resolver um problema", "Uma linguagem de programação", "Um sistema operacional"],
+                correct: 1,
+                category: "Programação",
+                difficulty: "Fácil"
+            },
+            {
+                question: "Qual destes não é um framework JavaScript?",
+                options: ["React", "Angular", "Vue", "JavaSpring"],
+                correct: 3,
+                category: "Programação",
+                difficulty: "Médio"
+            },
+            {
+                question: "O que é IoT?",
+                options: ["Internet of Things", "International Organization of Technology", "Input-Output Transmission", "Integrated Online Testing"],
+                correct: 0,
+                category: "Tecnologia",
+                difficulty: "Médio"
+            },
+            {
+                question: "Qual empresa desenvolveu o sistema operacional Windows?",
+                options: ["Apple", "Microsoft", "Google", "IBM"],
+                correct: 1,
+                category: "Computação",
+                difficulty: "Fácil"
+            },
+            {
+                question: "O que é um bug em programação?",
+                options: ["Um inseto no computador", "Um recurso não documentado", "Um erro ou defeito no software", "Um tipo de variável"],
+                correct: 2,
+                category: "Programação",
+                difficulty: "Fácil"
+            },
+            {
+                question: "Qual destes é um serviço de computação em nuvem?",
+                options: ["AWS", "USB", "CPU", "HTML"],
+                correct: 0,
+                category: "Computação",
+                difficulty: "Médio"
+            },
+            {
+                question: "O que significa a sigla URL?",
+                options: ["Uniform Resource Locator", "Universal Reference Link", "Unified Resource Language", "User Response Logic"],
+                correct: 0,
+                category: "Internet",
+                difficulty: "Fácil"
             }
         ];
 
         // Variáveis de estado
-        let currentQuestion = 0;
+        let currentQuestionIndex = 0;
         let scoreTeamA = 0;
         let scoreTeamB = 0;
         let currentTeam = null;
         let revealedOptions = 0;
         let answered = false;
+        let questionsUsedIndices = [];
+        let currentQuestions = [];
 
         // Elementos DOM
         const nextBtn = document.getElementById('next-btn');
@@ -387,6 +481,9 @@
         const winnerAnnouncement = document.getElementById('winner-announcement');
         const finalScore = document.getElementById('final-score');
 
+        // Configurações
+        const QUESTIONS_PER_GAME = 10; // Número de perguntas por jogo
+
         // Event listeners
         nextBtn.addEventListener('click', nextQuestion);
         revealBtn.addEventListener('click', revealOption);
@@ -397,21 +494,82 @@
 
         // Iniciar o quiz
         document.addEventListener('DOMContentLoaded', () => {
+            initializeGame();
             showQuestion();
         });
 
+        function initializeGame() {
+            // Reiniciar variáveis
+            currentQuestionIndex = 0;
+            scoreTeamA = 0;
+            scoreTeamB = 0;
+            questionsUsedIndices = [];
+            currentQuestions = [];
+            
+            // Selecionar perguntas aleatórias
+            selectRandomQuestions();
+            
+            // Atualizar placar
+            scoreTeamAElement.textContent = '0';
+            scoreTeamBElement.textContent = '0';
+            
+            // Esconder resultados
+            resultsContainer.classList.add('hidden');
+            
+            // Habilitar botões
+            nextBtn.disabled = false;
+            revealBtn.disabled = true;
+        }
+
+        function selectRandomQuestions() {
+            // Limpar array de perguntas usadas se necessário
+            if (questionsUsedIndices.length >= questionBank.length * 0.7) {
+                questionsUsedIndices = [];
+            }
+            
+            // Selecionar perguntas aleatórias não utilizadas
+            currentQuestions = [];
+            const availableIndices = [];
+            
+            // Criar lista de índices disponíveis
+            for (let i = 0; i < questionBank.length; i++) {
+                if (!questionsUsedIndices.includes(i)) {
+                    availableIndices.push(i);
+                }
+            }
+            
+            // Embaralhar os índices disponíveis
+            shuffleArray(availableIndices);
+            
+            // Selecionar o número necessário de perguntas
+            const count = Math.min(QUESTIONS_PER_GAME, availableIndices.length);
+            for (let i = 0; i < count; i++) {
+                const index = availableIndices[i];
+                currentQuestions.push(questionBank[index]);
+                questionsUsedIndices.push(index);
+            }
+        }
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
         function showQuestion() {
-            if (currentQuestion >= questions.length) {
+            if (currentQuestionIndex >= currentQuestions.length) {
                 endQuiz();
                 return;
             }
 
-            const question = questions[currentQuestion];
+            const question = currentQuestions[currentQuestionIndex];
             
             // Atualizar progresso
-            const progress = ((currentQuestion) / questions.length) * 100;
+            const progress = ((currentQuestionIndex) / currentQuestions.length) * 100;
             quizProgress.value = progress;
-            progressText.textContent = `Pergunta ${currentQuestion + 1} de ${questions.length}`;
+            progressText.textContent = `Pergunta ${currentQuestionIndex + 1} de ${currentQuestions.length}`;
             
             // Exibir categoria e dificuldade
             categoryElement.textContent = question.category;
@@ -456,9 +614,9 @@
         }
 
         function revealOption() {
-            if (revealedOptions >= questions[currentQuestion].options.length) return;
+            if (revealedOptions >= currentQuestions[currentQuestionIndex].options.length) return;
             
-            const question = questions[currentQuestion];
+            const question = currentQuestions[currentQuestionIndex];
             const optionIndex = revealedOptions;
             
             // Criar botão para a opção
@@ -486,7 +644,7 @@
             if (answered || !currentTeam) return;
             
             answered = true;
-            const question = questions[currentQuestion];
+            const question = currentQuestions[currentQuestionIndex];
             const options = document.querySelectorAll('.option-btn');
             
             // Desabilitar todos os botões
@@ -532,7 +690,7 @@
         }
 
         function nextQuestion() {
-            currentQuestion++;
+            currentQuestionIndex++;
             nextBtn.disabled = true;
             showQuestion();
         }
@@ -575,16 +733,7 @@
         }
 
         function resetQuiz() {
-            currentQuestion = 0;
-            scoreTeamA = 0;
-            scoreTeamB = 0;
-            scoreTeamAElement.textContent = '0';
-            scoreTeamBElement.textContent = '0';
-            nextBtn.disabled = false;
-            revealBtn.disabled = true;
-            
-            resultsContainer.classList.add('hidden');
-            
+            initializeGame();
             showQuestion();
             
             // Mostrar notificação
