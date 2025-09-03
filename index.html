@@ -307,461 +307,325 @@
         </div>
     </div>
 
-    <script>
-        // Banco de perguntas expandido (exemplo com 20 perguntas, mas pode ser expandido para 1000+)
-        const questionBank = [
-            {
-                question: "Qual dessas opções não é um Sistema Operacional?",
-                options: ["Microsoft", "LinuX", "macOS", "Windows"],
-                correct: 0,
-                category: "Computação",
-                difficulty: "Fácil"
-            },
-            {
-                question: "O que significa a sigla CPU em português?",
-                options: ["Computador Pessoal de Uso", "Componente Principal do Usuário", "Unidade Central de Processamento", "Controle de Processos do Usuário"],
-                correct: 2,
-                category: "Computação",
-                difficulty: "Fácil"
-            },
-            {
-                question: "Em programação, o que é uma variável?",
-                options: ["Um erro no código", "Um tipo de hardware", "Um local na memória que armazena um valor", "Um comando de saída de dados"],
-                correct: 2,
-                category: "Programação",
-                difficulty: "Fácil"
-            },
-            {
-                question: "Qual dos elementos não é uma linguagem de programação?",
-                options: ["HTML", "JavaScript", "Java", "Python"],
-                correct: 0,
-                category: "Programação",
-                difficulty: "Fácil"
-            },
-            {
-                question: "O que significa a sigla HTML em português?",
-                options: ["Hipertexto e Marcação de Linguagem", "Linguagem de Marcação de Hipertexto", "Hardware e Tecnologia Moderna de Links", "Interface de Texto para Múltiplas Linguagens"],
-                correct: 1,
-                category: "Programação",
-                difficulty: "Fácil"
-            },
-            {
-                question: "O que é um SSD em computação?",
-                options: ["Sistema de Segurança de Dados", "Software de Supervisão Digital", "Dispositivo de Estado Sólido (Solid-State Drive)", "Servidor de Serviços Distribuídos"],
-                correct: 2,
-                category: "Computação",
-                difficulty: "Fácil"
-            },
-            {
-                question: "Qual componente é conhecido como o cérebro do computador?",
-                options: ["RAM", "CPU", "HD", "Placa-Mãe"],
-                correct: 1,
-                category: "Computação",
-                difficulty: "Fácil"
-            },
-            {
-                question: "Qual destes não é um tipo de dado primário em JavaScript?",
-                options: ["String", "Boolean", "Number", "Array"],
-                correct: 3,
-                category: "Programação",
-                difficulty: "Médio"
-            },
-            {
-                question: "Qual protocolo é usado para enviar e-mails?",
-                options: ["HTTP", "FTP", "SMTP", "SSH"],
-                correct: 2,
-                category: "Redes",
-                difficulty: "Médio"
-            },
-            {
-                question: "O que é um firewall?",
-                options: ["Um sistema de aquecimento", "Um dispositivo de segurança de rede", "Um tipo de vírus", "Um software de edição de texto"],
-                correct: 1,
-                category: "Segurança",
-                difficulty: "Médio"
-            },
-            {
-                question: "Qual destes é um banco de dados NoSQL?",
-                options: ["MySQL", "PostgreSQL", "MongoDB", "Oracle"],
-                correct: 2,
-                category: "Banco de Dados",
-                difficulty: "Médio"
-            },
-            {
-                question: "O que significa a sigla VPN?",
-                options: ["Virtual Private Network", "Visual Programming Network", "Video Processing Node", "Virtual Protocol Number"],
-                correct: 0,
-                category: "Redes",
-                difficulty: "Médio"
-            },
-            {
-                question: "Qual linguagem de programação foi criada por Guido van Rossum?",
-                options: ["Java", "Python", "C++", "Ruby"],
-                correct: 1,
-                category: "Programação",
-                difficulty: "Médio"
-            },
-            {
-                question: "O que é um algoritmo?",
-                options: ["Um tipo de hardware", "Um conjunto de instruções para resolver um problema", "Uma linguagem de programação", "Um sistema operacional"],
-                correct: 1,
-                category: "Programação",
-                difficulty: "Fácil"
-            },
-            {
-                question: "Qual destes não é um framework JavaScript?",
-                options: ["React", "Angular", "Vue", "JavaSpring"],
-                correct: 3,
-                category: "Programação",
-                difficulty: "Médio"
-            },
-            {
-                question: "O que é IoT?",
-                options: ["Internet of Things", "International Organization of Technology", "Input-Output Transmission", "Integrated Online Testing"],
-                correct: 0,
-                category: "Tecnologia",
-                difficulty: "Médio"
-            },
-            {
-                question: "Qual empresa desenvolveu o sistema operacional Windows?",
-                options: ["Apple", "Microsoft", "Google", "IBM"],
-                correct: 1,
-                category: "Computação",
-                difficulty: "Fácil"
-            },
-            {
-                question: "O que é um bug em programação?",
-                options: ["Um inseto no computador", "Um recurso não documentado", "Um erro ou defeito no software", "Um tipo de variável"],
-                correct: 2,
-                category: "Programação",
-                difficulty: "Fácil"
-            },
-            {
-                question: "Qual destes é um serviço de computação em nuvem?",
-                options: ["AWS", "USB", "CPU", "HTML"],
-                correct: 0,
-                category: "Computação",
-                difficulty: "Médio"
-            },
-            {
-                question: "O que significa a sigla URL?",
-                options: ["Uniform Resource Locator", "Universal Reference Link", "Unified Resource Language", "User Response Logic"],
-                correct: 0,
-                category: "Internet",
-                difficulty: "Fácil"
-            }
-        ];
+    <script src="question.js"></script>
+<script>
+    // Variáveis de estado
+    let currentQuestionIndex = 0;
+    let scoreTeamA = 0;
+    let scoreTeamB = 0;
+    let currentTeam = null;
+    let revealedOptions = 0;
+    let answered = false;
+    let questionsUsedIndices = [];
+    let currentQuestions = [];
 
-        // Variáveis de estado
-        let currentQuestionIndex = 0;
-        let scoreTeamA = 0;
-        let scoreTeamB = 0;
-        let currentTeam = null;
-        let revealedOptions = 0;
-        let answered = false;
-        let questionsUsedIndices = [];
-        let currentQuestions = [];
+    // Elementos DOM
+    const nextBtn = document.getElementById('next-btn');
+    const revealBtn = document.getElementById('reveal-btn');
+    const resetBtn = document.getElementById('reset-btn');
+    const restartBtn = document.getElementById('restart-btn');
+    const teamABtn = document.getElementById('team-a-btn');
+    const teamBBtn = document.getElementById('team-b-btn');
+    const questionText = document.getElementById('question-text');
+    const optionsContainer = document.getElementById('options-container');
+    const scoreTeamAElement = document.getElementById('score-team-a');
+    const scoreTeamBElement = document.getElementById('score-team-b');
+    const quizProgress = document.getElementById('quiz-progress');
+    const progressText = document.getElementById('progress-text');
+    const resultsContainer = document.getElementById('results-container');
+    const categoryElement = document.getElementById('category');
+    const difficultyElement = document.getElementById('difficulty');
+    const winnerAnnouncement = document.getElementById('winner-announcement');
+    const finalScore = document.getElementById('final-score');
 
-        // Elementos DOM
-        const nextBtn = document.getElementById('next-btn');
-        const revealBtn = document.getElementById('reveal-btn');
-        const resetBtn = document.getElementById('reset-btn');
-        const restartBtn = document.getElementById('restart-btn');
-        const teamABtn = document.getElementById('team-a-btn');
-        const teamBBtn = document.getElementById('team-b-btn');
-        const questionText = document.getElementById('question-text');
-        const optionsContainer = document.getElementById('options-container');
-        const scoreTeamAElement = document.getElementById('score-team-a');
-        const scoreTeamBElement = document.getElementById('score-team-b');
-        const quizProgress = document.getElementById('quiz-progress');
-        const progressText = document.getElementById('progress-text');
-        const resultsContainer = document.getElementById('results-container');
-        const categoryElement = document.getElementById('category');
-        const difficultyElement = document.getElementById('difficulty');
-        const winnerAnnouncement = document.getElementById('winner-announcement');
-        const finalScore = document.getElementById('final-score');
+    // Configurações
+    const QUESTIONS_PER_GAME = 10; // Número de perguntas por jogo
 
-        // Configurações
-        const QUESTIONS_PER_GAME = 10; // Número de perguntas por jogo
+    // Event listeners
+    nextBtn.addEventListener('click', nextQuestion);
+    revealBtn.addEventListener('click', revealOption);
+    resetBtn.addEventListener('click', resetQuiz);
+    restartBtn.addEventListener('click', restartQuiz);
+    teamABtn.addEventListener('click', () => selectTeam('A'));
+    teamBBtn.addEventListener('click', () => selectTeam('B'));
 
-        // Event listeners
-        nextBtn.addEventListener('click', nextQuestion);
-        revealBtn.addEventListener('click', revealOption);
-        resetBtn.addEventListener('click', resetQuiz);
-        restartBtn.addEventListener('click', restartQuiz);
-        teamABtn.addEventListener('click', () => selectTeam('A'));
-        teamBBtn.addEventListener('click', () => selectTeam('B'));
-
-        // Iniciar o quiz
-        document.addEventListener('DOMContentLoaded', () => {
+    // Iniciar o quiz após carregar as perguntas
+    document.addEventListener('DOMContentLoaded', () => {
+        // Verificar se as perguntas foram carregadas
+        if (typeof questionBank !== 'undefined') {
             initializeGame();
             showQuestion();
-        });
+        } else {
+            console.error("Erro: Banco de perguntas não carregado.");
+            questionText.textContent = "Erro ao carregar as perguntas. Verifique o arquivo perguntas.js";
+        }
+    });
 
-        function initializeGame() {
-            // Reiniciar variáveis
-            currentQuestionIndex = 0;
-            scoreTeamA = 0;
-            scoreTeamB = 0;
+    // O restante das funções permanece igual...
+    function initializeGame() {
+        // Reiniciar variáveis
+        currentQuestionIndex = 0;
+        scoreTeamA = 0;
+        scoreTeamB = 0;
+        questionsUsedIndices = [];
+        currentQuestions = [];
+        
+        // Selecionar perguntas aleatórias
+        selectRandomQuestions();
+        
+        // Atualizar placar
+        scoreTeamAElement.textContent = '0';
+        scoreTeamBElement.textContent = '0';
+        
+        // Esconder resultados
+        resultsContainer.classList.add('hidden');
+        
+        // Habilitar botões
+        nextBtn.disabled = false;
+        revealBtn.disabled = true;
+    }
+
+    function selectRandomQuestions() {
+        // Limpar array de perguntas usadas se necessário
+        if (questionsUsedIndices.length >= questionBank.length * 0.7) {
             questionsUsedIndices = [];
-            currentQuestions = [];
-            
-            // Selecionar perguntas aleatórias
-            selectRandomQuestions();
-            
-            // Atualizar placar
-            scoreTeamAElement.textContent = '0';
-            scoreTeamBElement.textContent = '0';
-            
-            // Esconder resultados
-            resultsContainer.classList.add('hidden');
-            
-            // Habilitar botões
-            nextBtn.disabled = false;
-            revealBtn.disabled = true;
         }
-
-        function selectRandomQuestions() {
-            // Limpar array de perguntas usadas se necessário
-            if (questionsUsedIndices.length >= questionBank.length * 0.7) {
-                questionsUsedIndices = [];
-            }
-            
-            // Selecionar perguntas aleatórias não utilizadas
-            currentQuestions = [];
-            const availableIndices = [];
-            
-            // Criar lista de índices disponíveis
-            for (let i = 0; i < questionBank.length; i++) {
-                if (!questionsUsedIndices.includes(i)) {
-                    availableIndices.push(i);
-                }
-            }
-            
-            // Embaralhar os índices disponíveis
-            shuffleArray(availableIndices);
-            
-            // Selecionar o número necessário de perguntas
-            const count = Math.min(QUESTIONS_PER_GAME, availableIndices.length);
-            for (let i = 0; i < count; i++) {
-                const index = availableIndices[i];
-                currentQuestions.push(questionBank[index]);
-                questionsUsedIndices.push(index);
+        
+        // Selecionar perguntas aleatórias não utilizadas
+        currentQuestions = [];
+        const availableIndices = [];
+        
+        // Criar lista de índices disponíveis
+        for (let i = 0; i < questionBank.length; i++) {
+            if (!questionsUsedIndices.includes(i)) {
+                availableIndices.push(i);
             }
         }
+        
+        // Embaralhar os índices disponíveis
+        shuffleArray(availableIndices);
+        
+        // Selecionar o número necessário de perguntas
+        const count = Math.min(QUESTIONS_PER_GAME, availableIndices.length);
+        for (let i = 0; i < count; i++) {
+            const index = availableIndices[i];
+            currentQuestions.push(questionBank[index]);
+            questionsUsedIndices.push(index);
+        }
+    }
 
-        function shuffleArray(array) {
-            for (let i = array.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
-            }
-            return array;
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
+    function showQuestion() {
+        if (currentQuestionIndex >= currentQuestions.length) {
+            endQuiz();
+            return;
         }
 
-        function showQuestion() {
-            if (currentQuestionIndex >= currentQuestions.length) {
-                endQuiz();
-                return;
-            }
+        const question = currentQuestions[currentQuestionIndex];
+        
+        // Atualizar progresso
+        const progress = ((currentQuestionIndex) / currentQuestions.length) * 100;
+        quizProgress.value = progress;
+        progressText.textContent = `Pergunta ${currentQuestionIndex + 1} de ${currentQuestions.length}`;
+        
+        // Exibir categoria e dificuldade
+        categoryElement.textContent = question.category;
+        difficultyElement.textContent = question.difficulty;
+        
+        // Exibir pergunta
+        questionText.textContent = question.question;
+        
+        // Limpar opções
+        optionsContainer.innerHTML = '';
+        revealedOptions = 0;
+        answered = false;
+        
+        // Desabilitar botões até que um time seja selecionado
+        revealBtn.disabled = true;
+        
+        // Resetar seleção de time
+        currentTeam = null;
+        teamABtn.classList.remove('active');
+        teamBBtn.classList.remove('active');
+    }
 
-            const question = currentQuestions[currentQuestionIndex];
-            
-            // Atualizar progresso
-            const progress = ((currentQuestionIndex) / currentQuestions.length) * 100;
-            quizProgress.value = progress;
-            progressText.textContent = `Pergunta ${currentQuestionIndex + 1} de ${currentQuestions.length}`;
-            
-            // Exibir categoria e dificuldade
-            categoryElement.textContent = question.category;
-            difficultyElement.textContent = question.difficulty;
-            
-            // Exibir pergunta
-            questionText.textContent = question.question;
-            
-            // Limpar opções
-            optionsContainer.innerHTML = '';
-            revealedOptions = 0;
-            answered = false;
-            
-            // Desabilitar botões até que um time seja selecionado
-            revealBtn.disabled = true;
-            
-            // Resetar seleção de time
-            currentTeam = null;
-            teamABtn.classList.remove('active');
+    function selectTeam(team) {
+        if (answered) return;
+        
+        currentTeam = team;
+        
+        // Destacar o time selecionado
+        if (team === 'A') {
+            teamABtn.classList.add('active');
             teamBBtn.classList.remove('active');
+        } else {
+            teamBBtn.classList.add('active');
+            teamABtn.classList.remove('active');
         }
+        
+        // Habilitar o botão de revelar
+        revealBtn.disabled = false;
+        
+        // Mostrar notificação
+        showNotification(`Time ${team === 'A' ? 'Azul' : 'Vermelho'} selecionado para responder!`);
+    }
 
-        function selectTeam(team) {
-            if (answered) return;
-            
-            currentTeam = team;
-            
-            // Destacar o time selecionado
-            if (team === 'A') {
-                teamABtn.classList.add('active');
-                teamBBtn.classList.remove('active');
+    function revealOption() {
+        if (revealedOptions >= currentQuestions[currentQuestionIndex].options.length) return;
+        
+        const question = currentQuestions[currentQuestionIndex];
+        const optionIndex = revealedOptions;
+        
+        // Criar botão para a opção
+        const button = document.createElement('button');
+        button.className = 'button is-large is-fullwidth option-btn option-reveal';
+        button.innerHTML = `<span class="option-letter">${String.fromCharCode(65 + optionIndex)}</span> ${question.options[optionIndex]}`;
+        button.dataset.index = optionIndex;
+        
+        // Adicionar evento de clique
+        button.addEventListener('click', () => checkAnswer(optionIndex));
+        
+        // Adicionar ao container
+        optionsContainer.appendChild(button);
+        
+        // Atualizar contador
+        revealedOptions++;
+        
+        // Desabilitar botão se todas as opções foram reveladas
+        if (revealedOptions >= question.options.length) {
+            revealBtn.disabled = true;
+        }
+    }
+
+    function checkAnswer(selectedIndex) {
+        if (answered || !currentTeam) return;
+        
+        answered = true;
+        const question = currentQuestions[currentQuestionIndex];
+        const options = document.querySelectorAll('.option-btn');
+        
+        // Desabilitar todos os botões
+        options.forEach(btn => {
+            btn.disabled = true;
+        });
+        
+        // Marcar resposta correta e incorreta
+        options.forEach((btn, index) => {
+            if (index === question.correct) {
+                btn.classList.add('correct');
+            }
+            if (index === selectedIndex && index !== question.correct) {
+                btn.classList.add('incorrect');
+            }
+        });
+        
+        // Atualizar pontuação
+        if (selectedIndex === question.correct) {
+            if (currentTeam === 'A') {
+                scoreTeamA++;
+                scoreTeamAElement.textContent = scoreTeamA;
+                scoreTeamAElement.parentElement.parentElement.classList.add('winner-animation');
+                setTimeout(() => {
+                    scoreTeamAElement.parentElement.parentElement.classList.remove('winner-animation');
+                }, 1500);
+                showNotification("Resposta correta! Time Azul pontua!", "success");
             } else {
-                teamBBtn.classList.add('active');
-                teamABtn.classList.remove('active');
+                scoreTeamB++;
+                scoreTeamBElement.textContent = scoreTeamB;
+                scoreTeamBElement.parentElement.parentElement.classList.add('winner-animation');
+                setTimeout(() => {
+                    scoreTeamBElement.parentElement.parentElement.classList.remove('winner-animation');
+                }, 1500);
+                showNotification("Resposta correta! Time Vermelho pontua!", "success");
             }
-            
-            // Habilitar o botão de revelar
-            revealBtn.disabled = false;
-            
-            // Mostrar notificação
-            showNotification(`Time ${team === 'A' ? 'Azul' : 'Vermelho'} selecionado para responder!`);
+        } else {
+            showNotification(`Resposta incorreta! A correta era: ${question.options[question.correct]}`, "danger");
         }
+        
+        // Habilitar o botão de próxima pergunta
+        nextBtn.disabled = false;
+    }
 
-        function revealOption() {
-            if (revealedOptions >= currentQuestions[currentQuestionIndex].options.length) return;
-            
-            const question = currentQuestions[currentQuestionIndex];
-            const optionIndex = revealedOptions;
-            
-            // Criar botão para a opção
-            const button = document.createElement('button');
-            button.className = 'button is-large is-fullwidth option-btn option-reveal';
-            button.innerHTML = `<span class="option-letter">${String.fromCharCode(65 + optionIndex)}</span> ${question.options[optionIndex]}`;
-            button.dataset.index = optionIndex;
-            
-            // Adicionar evento de clique
-            button.addEventListener('click', () => checkAnswer(optionIndex));
-            
-            // Adicionar ao container
-            optionsContainer.appendChild(button);
-            
-            // Atualizar contador
-            revealedOptions++;
-            
-            // Desabilitar botão se todas as opções foram reveladas
-            if (revealedOptions >= question.options.length) {
-                revealBtn.disabled = true;
-            }
+    function nextQuestion() {
+        currentQuestionIndex++;
+        nextBtn.disabled = true;
+        showQuestion();
+    }
+
+    function showNotification(message, type = "info") {
+        // Remover notificação anterior se existir
+        const existingNotification = document.querySelector('.floating-notification');
+        if (existingNotification) {
+            existingNotification.remove();
         }
-
-        function checkAnswer(selectedIndex) {
-            if (answered || !currentTeam) return;
-            
-            answered = true;
-            const question = currentQuestions[currentQuestionIndex];
-            const options = document.querySelectorAll('.option-btn');
-            
-            // Desabilitar todos os botões
-            options.forEach(btn => {
-                btn.disabled = true;
-            });
-            
-            // Marcar resposta correta e incorreta
-            options.forEach((btn, index) => {
-                if (index === question.correct) {
-                    btn.classList.add('correct');
-                }
-                if (index === selectedIndex && index !== question.correct) {
-                    btn.classList.add('incorrect');
-                }
-            });
-            
-            // Atualizar pontuação
-            if (selectedIndex === question.correct) {
-                if (currentTeam === 'A') {
-                    scoreTeamA++;
-                    scoreTeamAElement.textContent = scoreTeamA;
-                    scoreTeamAElement.parentElement.parentElement.classList.add('winner-animation');
-                    setTimeout(() => {
-                        scoreTeamAElement.parentElement.parentElement.classList.remove('winner-animation');
-                    }, 1500);
-                    showNotification("Resposta correta! Time Azul pontua!", "success");
-                } else {
-                    scoreTeamB++;
-                    scoreTeamBElement.textContent = scoreTeamB;
-                    scoreTeamBElement.parentElement.parentElement.classList.add('winner-animation');
-                    setTimeout(() => {
-                        scoreTeamBElement.parentElement.parentElement.classList.remove('winner-animation');
-                    }, 1500);
-                    showNotification("Resposta correta! Time Vermelho pontua!", "success");
-                }
-            } else {
-                showNotification(`Resposta incorreta! A correta era: ${question.options[question.correct]}`, "danger");
-            }
-            
-            // Habilitar o botão de próxima pergunta
-            nextBtn.disabled = false;
+        
+        // Criar nova notificação
+        const notification = document.createElement('div');
+        notification.className = `notification is-light floating-notification`;
+        
+        if (type === "success") {
+            notification.classList.add('is-success');
+        } else if (type === "danger") {
+            notification.classList.add('is-danger');
+        } else {
+            notification.classList.add('is-info');
         }
-
-        function nextQuestion() {
-            currentQuestionIndex++;
-            nextBtn.disabled = true;
-            showQuestion();
-        }
-
-        function showNotification(message, type = "info") {
-            // Remover notificação anterior se existir
-            const existingNotification = document.querySelector('.floating-notification');
-            if (existingNotification) {
-                existingNotification.remove();
-            }
-            
-            // Criar nova notificação
-            const notification = document.createElement('div');
-            notification.className = `notification is-light floating-notification`;
-            
-            if (type === "success") {
-                notification.classList.add('is-success');
-            } else if (type === "danger") {
-                notification.classList.add('is-danger');
-            } else {
-                notification.classList.add('is-info');
-            }
-            
-            notification.innerHTML = `<button class="delete"></button>${message}`;
-            
-            // Adicionar ao documento
-            document.body.appendChild(notification);
-            
-            // Adicionar evento para fechar
-            notification.querySelector('.delete').addEventListener('click', () => {
+        
+        notification.innerHTML = `<button class="delete"></button>${message}`;
+        
+        // Adicionar ao documento
+        document.body.appendChild(notification);
+        
+        // Adicionar evento para fechar
+        notification.querySelector('.delete').addEventListener('click', () => {
+            notification.remove();
+        });
+        
+        // Remover automaticamente após 3 segundos
+        setTimeout(() => {
+            if (notification.parentNode) {
                 notification.remove();
-            });
-            
-            // Remover automaticamente após 3 segundos
-            setTimeout(() => {
-                if (notification.parentNode) {
-                    notification.remove();
-                }
-            }, 3000);
-        }
-
-        function resetQuiz() {
-            initializeGame();
-            showQuestion();
-            
-            // Mostrar notificação
-            showNotification("Quiz reiniciado! Boa sorte para os times!");
-        }
-
-        function endQuiz() {
-            // Determinar o vencedor
-            let winnerText = "";
-            if (scoreTeamA > scoreTeamB) {
-                winnerText = "Time Azul Venceu!";
-            } else if (scoreTeamB > scoreTeamA) {
-                winnerText = "Time Vermelho Venceu!";
-            } else {
-                winnerText = "Empate!";
             }
-            
-            winnerAnnouncement.textContent = winnerText;
-            finalScore.textContent = `Time Azul ${scoreTeamA} x ${scoreTeamB} Time Vermelho`;
-            
-            resultsContainer.classList.remove('hidden');
-            nextBtn.disabled = true;
-        }
+        }, 3000);
+    }
 
-        function restartQuiz() {
-            resetQuiz();
-            resultsContainer.classList.add('hidden');
+    function resetQuiz() {
+        initializeGame();
+        showQuestion();
+        
+        // Mostrar notificação
+        showNotification("Quiz reiniciado! Boa sorte para os times!");
+    }
+
+    function endQuiz() {
+        // Determinar o vencedor
+        let winnerText = "";
+        if (scoreTeamA > scoreTeamB) {
+            winnerText = "Time Azul Venceu!";
+        } else if (scoreTeamB > scoreTeamA) {
+            winnerText = "Time Vermelho Venceu!";
+        } else {
+            winnerText = "Empate!";
         }
-    </script>
+        
+        winnerAnnouncement.textContent = winnerText;
+        finalScore.textContent = `Time Azul ${scoreTeamA} x ${scoreTeamB} Time Vermelho`;
+        
+        resultsContainer.classList.remove('hidden');
+        nextBtn.disabled = true;
+    }
+
+    function restartQuiz() {
+        resetQuiz();
+        resultsContainer.classList.add('hidden');
+    }
+</script>
 </body>
 </html>
