@@ -37,7 +37,7 @@ const questionBank = [
     },
     {
         question: "O que é um SSD em computação?",
-        options: ["Sistema de Segurança de Dados", "Software de Supervisão Digital", "Dispositivo de Estado Sólido (Solid-State Drive)", "Servidor de Serviços Distribuídos"],
+        options: ["Sistema de Segurança de Dados", "Software de Supervisão Digital", "Dispositivo de Estado Sólido", "Servidor de Serviços Distribuídos"],
         correct: 2,
         category: "Computação",
         difficulty: "Fácil"
