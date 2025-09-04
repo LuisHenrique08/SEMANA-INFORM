@@ -3,199 +3,225 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz Competitivo - Time A vs Time B</title>
+    <title>Quiz Competitivo - Time Azul vs Time Vermelho</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
     <style>
-        /* (O CSS permanece exatamente igual) */
         :root {
-            --team-a-color: #3498db;
-            --team-b-color: #e74c3c;
-        }
-        
-        body {
-            background: linear-gradient(135deg, #3c3c40, #5a5656, #3e3d3c);
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
-            min-height: 100vh;
-            padding: 20px;
-        }
-        
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        
-        .main-container {
-            max-width: 1000px;
-            margin: 0 auto;
-            background: rgb(167, 162, 162);
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            overflow: hidden;
-        }
-        
-        .header-title {
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
-        
-        .team-card {
-            border-radius: 12px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-        
-        .team-a {
-            border-bottom: 5px solid var(--team-a-color);
-        }
-        
-        .team-b {
-            border-bottom: 5px solid var(--team-b-color);
-        }
-        
-        .team-a .card-header-title {
-            color: var(--team-a-color);
-        }
-        
-        .team-b .card-header-title {
-            color: var(--team-b-color);
-        }
-        
-        .score {
-            font-size: 3rem;
-            font-weight: bold;
-        }
-        
-        .question-card {
-            margin: 30px 0;
-            border-radius: 12px;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease;
-            background: linear-gradient(to bottom right, #f8f9fa, #e9ecef);
-        }
-        
-        .question-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .options-container {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin-top: 20px;
-        }
-        
-        @media (max-width: 768px) {
-            .options-container {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        .option-btn {
-            transition: all 0.2s ease;
-            height: 100%;
-            border: 2px solid transparent;
-        }
-        
-        .option-btn:hover {
-            transform: scale(1.03);
-        }
-        
-        .correct {
-            background-color: #48c78e !important;
-            color: white !important;
-            border-color: #38a67c !important;
-        }
-        
-        .incorrect {
-            background-color: #f14668 !important;
-            color: white !important;
-            border-color: #d13654 !important;
-        }
-        
-        .progress-bar {
-            margin: 20px 0;
-            height: 10px;
-            border-radius: 5px;
-        }
-        
-        .winner-animation {
-            animation: pulse 1.5s infinite;
-        }
-        
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-        
-        .category-tag {
-            margin-bottom: 15px;
-        }
-        
-        .question-counter {
-            font-weight: bold;
-            color: #7a7a7a;
-        }
-        
-        .team-selector {
-            display: flex;
-            justify-content: center;
-            margin: 20px 0;
-            gap: 20px;
-        }
-        
-        .team-btn {
-            font-size: 1.2rem;
-            padding: 15px 30px;
-            transition: all 0.3s ease;
-        }
-        
-        .team-btn.active {
-            transform: scale(1.05);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-        
-        .option-reveal {
-            animation: fadeIn 0.5s ease-out;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .floating-notification {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 100;
-            animation: slideIn 0.5s ease-out;
-        }
-        
-        @keyframes slideIn {
-            from { transform: translateX(100px); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-        
-        .option-letter {
-            display: inline-block;
-            width: 30px;
-            height: 30px;
-            line-height: 30px;
-            text-align: center;
-            background: #485fc7;
-            color: white;
-            border-radius: 50%;
-            margin-right: 10px;
-        }
+    --team-a-color: #3498db;
+    --team-b-color: #e74c3c;
+    --dark-gray: #394147f7;
+    --medium-gray: #969fa8;
+    --light-gray: #718096;
+    --lighter-gray: #e2e8f0;
+}
+
+body {
+    background-color: var(--dark-gray);
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.main-container {
+    max-width: 1250px;
+    margin: 0 auto;
+    background: var(--medium-gray);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+}
+
+.hero {
+    background-color: var(--medium-gray);
+    color: white;
+}
+
+.header-title {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    color: white;
+}
+
+.team-card {
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    background-color: var(--lighter-gray);
+}
+
+.team-a {
+    border-bottom: 5px solid var(--team-a-color);
+}
+
+.team-b {
+    border-bottom: 5px solid var(--team-b-color);
+}
+
+.team-a .card-header-title {
+    color: var(--team-a-color);
+}
+
+.team-b .card-header-title {
+    color: var(--team-b-color);
+}
+
+.score {
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+.question-card {
+    margin: 30px 0;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+    background: var(--lighter-gray);
+}
+
+.question-card:hover {
+    transform: translateY(-5px);
+}
+
+.options-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+    .options-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+.option-btn {
+    transition: all 0.2s ease;
+    height: 100%;
+    border: 2px solid transparent;
+    background-color: white;
+}
+
+.option-btn:hover {
+    transform: scale(1.03);
+}
+
+.correct {
+    background-color: #48c78e !important;
+    color: white !important;
+    border-color: #38a67c !important;
+}
+
+.incorrect {
+    background-color: #f14668 !important;
+    color: white !important;
+    border-color: #d13654 !important;
+}
+
+.progress-bar {
+    margin: 20px 0;
+    height: 10px;
+    border-radius: 5px;
+}
+
+.winner-animation {
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.category-tag {
+    margin-bottom: 15px;
+}
+
+.question-counter {
+    font-weight: bold;
+    color: var(--lighter-gray);
+}
+
+.team-selector {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    gap: 20px;
+}
+
+.team-btn {
+    font-size: 1.2rem;
+    padding: 15px 30px;
+    transition: all 0.3s ease;
+}
+
+.team-btn.active {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.option-reveal {
+    animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.floating-notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 100;
+    animation: slideIn 0.5s ease-out;
+}
+
+@keyframes slideIn {
+    from { transform: translateX(100px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+.option-letter {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    background: #485fc7;
+    color: white;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.vs-box .tag {
+    background-color: var(--medium-gray);
+    color: white;
+    border: 2px solid var(--lighter-gray);
+}
+
+.subtitle {
+    color: var(--lighter-gray);
+}
+
+.title {
+    color: #2d3748;
+}
+
+.card-content {
+    color: #2d3748;
+}
+
+.hidden {
+    display: none !important;
+}
     </style>
 </head>
 <body>
     <div class="main-container">
         <!-- Cabeçalho -->
-        <section class="hero is-info">
+        <section class="hero">
             <div class="hero-body has-text-centered">
                 <h1 class="title is-1 header-title">
                     <i class="fas fa-trophy"></i> Semana da Informática
@@ -221,7 +247,7 @@
             
             <div class="column is-2 has-text-centered">
                 <div class="vs-box">
-                    <span class="tag is-large is-info is-light">VS</span>
+                    <span class="tag is-large is-light">VS</span>
                 </div>
             </div>
             
@@ -261,11 +287,11 @@
                 <div class="card-content">
                     <div class="tags category-tag are-medium">
                         <span class="tag is-info" id="category">Computação</span>
-                        <span class="tag is-warning" id="difficulty">Básica</span>
+                        <span class="tag is-warning" id="difficulty">Fácil</span>
                     </div>
                     
                     <p class="title is-3 has-text-centered" id="question-text">
-                        Qual dessas opções não é um Sistema Operacional?
+                        Carregando perguntas...
                     </p>
                     
                     <div class="options-container" id="options-container">
@@ -283,7 +309,7 @@
                 </button>
             </p>
             <p class="control">
-                <button id="reveal-btn" class="button is-large is-warning">
+                <button id="reveal-btn" class="button is-large is-warning hidden">
                     <i class="fas fa-eye"></i> &nbsp; Revelar Próxima Opção
                 </button>
             </p>
@@ -304,328 +330,10 @@
             <button id="restart-btn" class="button is-warning is-large">
                 <i class="fas fa-redo"></i> &nbsp; Jogar Novamente
             </button>
-        </div>
+        </div>  
     </div>
 
+    <script src="function.js"></script>
     <script src="question.js"></script>
-<script>
-    // Variáveis de estado
-    let currentQuestionIndex = 0;
-    let scoreTeamA = 0;
-    let scoreTeamB = 0;
-    let currentTeam = null;
-    let revealedOptions = 0;
-    let answered = false;
-    let questionsUsedIndices = [];
-    let currentQuestions = [];
-
-    // Elementos DOM
-    const nextBtn = document.getElementById('next-btn');
-    const revealBtn = document.getElementById('reveal-btn');
-    const resetBtn = document.getElementById('reset-btn');
-    const restartBtn = document.getElementById('restart-btn');
-    const teamABtn = document.getElementById('team-a-btn');
-    const teamBBtn = document.getElementById('team-b-btn');
-    const questionText = document.getElementById('question-text');
-    const optionsContainer = document.getElementById('options-container');
-    const scoreTeamAElement = document.getElementById('score-team-a');
-    const scoreTeamBElement = document.getElementById('score-team-b');
-    const quizProgress = document.getElementById('quiz-progress');
-    const progressText = document.getElementById('progress-text');
-    const resultsContainer = document.getElementById('results-container');
-    const categoryElement = document.getElementById('category');
-    const difficultyElement = document.getElementById('difficulty');
-    const winnerAnnouncement = document.getElementById('winner-announcement');
-    const finalScore = document.getElementById('final-score');
-
-    // Configurações
-    const QUESTIONS_PER_GAME = 10; // Número de perguntas por jogo
-
-    // Event listeners
-    nextBtn.addEventListener('click', nextQuestion);
-    revealBtn.addEventListener('click', revealOption);
-    resetBtn.addEventListener('click', resetQuiz);
-    restartBtn.addEventListener('click', restartQuiz);
-    teamABtn.addEventListener('click', () => selectTeam('A'));
-    teamBBtn.addEventListener('click', () => selectTeam('B'));
-
-    // Iniciar o quiz após carregar as perguntas
-    document.addEventListener('DOMContentLoaded', () => {
-        // Verificar se as perguntas foram carregadas
-        if (typeof questionBank !== 'undefined') {
-            initializeGame();
-            showQuestion();
-        } else {
-            console.error("Erro: Banco de perguntas não carregado.");
-            questionText.textContent = "Erro ao carregar as perguntas. Verifique o arquivo perguntas.js";
-        }
-    });
-
-    // O restante das funções permanece igual...
-    function initializeGame() {
-        // Reiniciar variáveis
-        currentQuestionIndex = 0;
-        scoreTeamA = 0;
-        scoreTeamB = 0;
-        questionsUsedIndices = [];
-        currentQuestions = [];
-        
-        // Selecionar perguntas aleatórias
-        selectRandomQuestions();
-        
-        // Atualizar placar
-        scoreTeamAElement.textContent = '0';
-        scoreTeamBElement.textContent = '0';
-        
-        // Esconder resultados
-        resultsContainer.classList.add('hidden');
-        
-        // Habilitar botões
-        nextBtn.disabled = false;
-        revealBtn.disabled = true;
-    }
-
-    function selectRandomQuestions() {
-        // Limpar array de perguntas usadas se necessário
-        if (questionsUsedIndices.length >= questionBank.length * 0.7) {
-            questionsUsedIndices = [];
-        }
-        
-        // Selecionar perguntas aleatórias não utilizadas
-        currentQuestions = [];
-        const availableIndices = [];
-        
-        // Criar lista de índices disponíveis
-        for (let i = 0; i < questionBank.length; i++) {
-            if (!questionsUsedIndices.includes(i)) {
-                availableIndices.push(i);
-            }
-        }
-        
-        // Embaralhar os índices disponíveis
-        shuffleArray(availableIndices);
-        
-        // Selecionar o número necessário de perguntas
-        const count = Math.min(QUESTIONS_PER_GAME, availableIndices.length);
-        for (let i = 0; i < count; i++) {
-            const index = availableIndices[i];
-            currentQuestions.push(questionBank[index]);
-            questionsUsedIndices.push(index);
-        }
-    }
-
-    function shuffleArray(array) {
-        for (let i = array.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]];
-        }
-        return array;
-    }
-
-    function showQuestion() {
-        if (currentQuestionIndex >= currentQuestions.length) {
-            endQuiz();
-            return;
-        }
-
-        const question = currentQuestions[currentQuestionIndex];
-        
-        // Atualizar progresso
-        const progress = ((currentQuestionIndex) / currentQuestions.length) * 100;
-        quizProgress.value = progress;
-        progressText.textContent = `Pergunta ${currentQuestionIndex + 1} de ${currentQuestions.length}`;
-        
-        // Exibir categoria e dificuldade
-        categoryElement.textContent = question.category;
-        difficultyElement.textContent = question.difficulty;
-        
-        // Exibir pergunta
-        questionText.textContent = question.question;
-        
-        // Limpar opções
-        optionsContainer.innerHTML = '';
-        revealedOptions = 0;
-        answered = false;
-        
-        // Desabilitar botões até que um time seja selecionado
-        revealBtn.disabled = true;
-        
-        // Resetar seleção de time
-        currentTeam = null;
-        teamABtn.classList.remove('active');
-        teamBBtn.classList.remove('active');
-    }
-
-    function selectTeam(team) {
-        if (answered) return;
-        
-        currentTeam = team;
-        
-        // Destacar o time selecionado
-        if (team === 'A') {
-            teamABtn.classList.add('active');
-            teamBBtn.classList.remove('active');
-        } else {
-            teamBBtn.classList.add('active');
-            teamABtn.classList.remove('active');
-        }
-        
-        // Habilitar o botão de revelar
-        revealBtn.disabled = false;
-        
-        // Mostrar notificação
-        showNotification(`Time ${team === 'A' ? 'Azul' : 'Vermelho'} selecionado para responder!`);
-    }
-
-    function revealOption() {
-        if (revealedOptions >= currentQuestions[currentQuestionIndex].options.length) return;
-        
-        const question = currentQuestions[currentQuestionIndex];
-        const optionIndex = revealedOptions;
-        
-        // Criar botão para a opção
-        const button = document.createElement('button');
-        button.className = 'button is-large is-fullwidth option-btn option-reveal';
-        button.innerHTML = `<span class="option-letter">${String.fromCharCode(65 + optionIndex)}</span> ${question.options[optionIndex]}`;
-        button.dataset.index = optionIndex;
-        
-        // Adicionar evento de clique
-        button.addEventListener('click', () => checkAnswer(optionIndex));
-        
-        // Adicionar ao container
-        optionsContainer.appendChild(button);
-        
-        // Atualizar contador
-        revealedOptions++;
-        
-        // Desabilitar botão se todas as opções foram reveladas
-        if (revealedOptions >= question.options.length) {
-            revealBtn.disabled = true;
-        }
-    }
-
-    function checkAnswer(selectedIndex) {
-        if (answered || !currentTeam) return;
-        
-        answered = true;
-        const question = currentQuestions[currentQuestionIndex];
-        const options = document.querySelectorAll('.option-btn');
-        
-        // Desabilitar todos os botões
-        options.forEach(btn => {
-            btn.disabled = true;
-        });
-        
-        // Marcar resposta correta e incorreta
-        options.forEach((btn, index) => {
-            if (index === question.correct) {
-                btn.classList.add('correct');
-            }
-            if (index === selectedIndex && index !== question.correct) {
-                btn.classList.add('incorrect');
-            }
-        });
-        
-        // Atualizar pontuação
-        if (selectedIndex === question.correct) {
-            if (currentTeam === 'A') {
-                scoreTeamA++;
-                scoreTeamAElement.textContent = scoreTeamA;
-                scoreTeamAElement.parentElement.parentElement.classList.add('winner-animation');
-                setTimeout(() => {
-                    scoreTeamAElement.parentElement.parentElement.classList.remove('winner-animation');
-                }, 1500);
-                showNotification("Resposta correta! Time Azul pontua!", "success");
-            } else {
-                scoreTeamB++;
-                scoreTeamBElement.textContent = scoreTeamB;
-                scoreTeamBElement.parentElement.parentElement.classList.add('winner-animation');
-                setTimeout(() => {
-                    scoreTeamBElement.parentElement.parentElement.classList.remove('winner-animation');
-                }, 1500);
-                showNotification("Resposta correta! Time Vermelho pontua!", "success");
-            }
-        } else {
-            showNotification(`Resposta incorreta! A correta era: ${question.options[question.correct]}`, "danger");
-        }
-        
-        // Habilitar o botão de próxima pergunta
-        nextBtn.disabled = false;
-    }
-
-    function nextQuestion() {
-        currentQuestionIndex++;
-        nextBtn.disabled = true;
-        showQuestion();
-    }
-
-    function showNotification(message, type = "info") {
-        // Remover notificação anterior se existir
-        const existingNotification = document.querySelector('.floating-notification');
-        if (existingNotification) {
-            existingNotification.remove();
-        }
-        
-        // Criar nova notificação
-        const notification = document.createElement('div');
-        notification.className = `notification is-light floating-notification`;
-        
-        if (type === "success") {
-            notification.classList.add('is-success');
-        } else if (type === "danger") {
-            notification.classList.add('is-danger');
-        } else {
-            notification.classList.add('is-info');
-        }
-        
-        notification.innerHTML = `<button class="delete"></button>${message}`;
-        
-        // Adicionar ao documento
-        document.body.appendChild(notification);
-        
-        // Adicionar evento para fechar
-        notification.querySelector('.delete').addEventListener('click', () => {
-            notification.remove();
-        });
-        
-        // Remover automaticamente após 3 segundos
-        setTimeout(() => {
-            if (notification.parentNode) {
-                notification.remove();
-            }
-        }, 3000);
-    }
-
-    function resetQuiz() {
-        initializeGame();
-        showQuestion();
-        
-        // Mostrar notificação
-        showNotification("Quiz reiniciado! Boa sorte para os times!");
-    }
-
-    function endQuiz() {
-        // Determinar o vencedor
-        let winnerText = "";
-        if (scoreTeamA > scoreTeamB) {
-            winnerText = "Time Azul Venceu!";
-        } else if (scoreTeamB > scoreTeamA) {
-            winnerText = "Time Vermelho Venceu!";
-        } else {
-            winnerText = "Empate!";
-        }
-        
-        winnerAnnouncement.textContent = winnerText;
-        finalScore.textContent = `Time Azul ${scoreTeamA} x ${scoreTeamB} Time Vermelho`;
-        
-        resultsContainer.classList.remove('hidden');
-        nextBtn.disabled = true;
-    }
-
-    function restartQuiz() {
-        resetQuiz();
-        resultsContainer.classList.add('hidden');
-    }
-</script>
 </body>
 </html>
