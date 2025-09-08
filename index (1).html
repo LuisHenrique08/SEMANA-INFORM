@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz Competitivo - Time Azul vs Time Vermelho</title>
+    <title>Semana da Informática - Time Azul vs Time Vermelho</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
@@ -12,7 +12,7 @@
     --team-a-color: #3498db;
     --team-b-color: #e74c3c;
     --dark-gray: #394147f7;
-    --medium-gray: #969fa8;
+    --medium-gray: #78818a;
     --light-gray: #718096;
     --lighter-gray: #e2e8f0;
 }
@@ -21,10 +21,11 @@ body {
     background-color: var(--dark-gray);
     min-height: 100vh;
     padding: 20px;
+    font-size: 50px; /* Aumentando a fonte base */
 }
 
 .main-container {
-    max-width: 1250px;
+    max-width: 2800px;
     margin: 0 auto;
     background: var(--medium-gray);
     border-radius: 15px;
@@ -35,11 +36,13 @@ body {
 .hero {
     background-color: var(--medium-gray);
     color: white;
+   
 }
 
 .header-title {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
     color: white;
+    
 }
 
 .team-card {
@@ -50,23 +53,25 @@ body {
 }
 
 .team-a {
-    border-bottom: 5px solid var(--team-a-color);
+    border-bottom: 10px solid var(--team-a-color);
 }
 
 .team-b {
-    border-bottom: 5px solid var(--team-b-color);
+    border-bottom: 10px solid var(--team-b-color);
 }
 
 .team-a .card-header-title {
     color: var(--team-a-color);
+    font-size: 2.4rem; /* Aumentado */
 }
 
 .team-b .card-header-title {
     color: var(--team-b-color);
+    font-size: 2.4rem; /* Aumentado */
 }
 
 .score {
-    font-size: 3rem;
+    font-size: 3.0 rem; /* Aumentado */
     font-weight: bold;
 }
 
@@ -100,6 +105,7 @@ body {
     height: 100%;
     border: 2px solid transparent;
     background-color: white;
+    font-size: 2.4rem; /* Aumentado */
 }
 
 .option-btn:hover {
@@ -136,11 +142,13 @@ body {
 
 .category-tag {
     margin-bottom: 15px;
+    font-size: 1.1rem; /* Aumentado */
 }
 
 .question-counter {
-    font-weight: bold;
+    
     color: var(--lighter-gray);
+    font-size: 2.0rem; /* Aumentado */
 }
 
 .team-selector {
@@ -151,7 +159,7 @@ body {
 }
 
 .team-btn {
-    font-size: 1.2rem;
+    font-size: 2.4rem; /* Aumentado */
     padding: 15px 30px;
     transition: all 0.3s ease;
 }
@@ -185,32 +193,51 @@ body {
 
 .option-letter {
     display: inline-block;
-    width: 30px;
-    height: 30px;
-    line-height: 30px;
+    width: 35px; /* Aumentado */
+    height: 35px; /* Aumentado */
+    line-height: 35px; /* Ajustado */
     text-align: center;
     background: #485fc7;
     color: white;
     border-radius: 50%;
     margin-right: 10px;
+    font-size: 1.5rem; /* Aumentado */
 }
 
 .vs-box .tag {
     background-color: var(--medium-gray);
     color: white;
     border: 2px solid var(--lighter-gray);
+    font-size: 5.0rem; /* Aumentado */
 }
 
 .subtitle {
     color: var(--lighter-gray);
+    font-size: 2.0rem; /* Aumentado */
 }
 
 .title {
     color: #2d3748;
 }
 
+.title.is-1 {
+    font-size: 4.0rem; /* Aumentado */
+}
+
+.title.is-3 {
+    font-size: 3.4rem; /* Aumentado */
+}
+
 .card-content {
     color: #2d3748;
+}
+
+.button {
+    font-size: 2.4rem; /* Aumentado */
+}
+
+.button.is-large {
+    font-size: 2.3rem; /* Aumentado */
 }
 
 .hidden {
@@ -285,10 +312,6 @@ body {
         <div id="question-area" class="section">
             <div class="card question-card">
                 <div class="card-content">
-                    <div class="tags category-tag are-medium">
-                        <span class="tag is-info" id="category">Computação</span>
-                        <span class="tag is-warning" id="difficulty">Fácil</span>
-                    </div>
                     
                     <p class="title is-3 has-text-centered" id="question-text">
                         Carregando perguntas...
@@ -309,9 +332,7 @@ body {
                 </button>
             </p>
             <p class="control">
-                <button id="reveal-btn" class="button is-large is-warning hidden">
-                    <i class="fas fa-eye"></i> &nbsp; Revelar Próxima Opção
-                </button>
+X
             </p>
             <p class="control">
                 <button id="reset-btn" class="button is-large is-danger">

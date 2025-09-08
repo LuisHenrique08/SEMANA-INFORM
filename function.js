@@ -116,9 +116,7 @@ function showQuestion() {
     quizProgress.value = progress;
     progressText.textContent = `Pergunta ${currentQuestionIndex + 1} de ${currentQuestions.length}`;
     
-    // Exibir categoria e dificuldade
-    categoryElement.textContent = question.category;
-    difficultyElement.textContent = question.difficulty;
+    
     
     // Exibir pergunta
     questionText.textContent = question.question;
@@ -270,7 +268,7 @@ function resetQuiz() {
     showQuestion();
     
     // Mostrar notificação
-    showNotification("Quiz reiniciado! Boa sorte para os times!");
+    showNotification("Perguntas reiniciadas! Boa sorte para os times!");
 }
 
 function endQuiz() {
