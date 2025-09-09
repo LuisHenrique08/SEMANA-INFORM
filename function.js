@@ -1,4 +1,3 @@
-
 // Variáveis de estado
 let currentQuestionIndex = 0;
 let scoreTeamA = 0;
@@ -10,7 +9,6 @@ let currentQuestions = [];
 
 // Elementos DOM
 const nextBtn = document.getElementById('next-btn');
-const revealBtn = document.getElementById('reveal-btn');
 const resetBtn = document.getElementById('reset-btn');
 const restartBtn = document.getElementById('restart-btn');
 const teamABtn = document.getElementById('team-a-btn');
@@ -22,14 +20,13 @@ const scoreTeamBElement = document.getElementById('score-team-b');
 const quizProgress = document.getElementById('quiz-progress');
 const progressText = document.getElementById('progress-text');
 const resultsContainer = document.getElementById('results-container');
-const categoryElement = document.getElementById('category');
-const difficultyElement = document.getElementById('difficulty');
 const winnerAnnouncement = document.getElementById('winner-announcement');
 const finalScore = document.getElementById('final-score');
+const resultsOverlay = document.querySelector('.results-overlay');
 
 // Configurações
-const QUESTIONS_PER_GAME = 10; // Número de perguntas por jogo
-const REVEAL_DELAY = 1000; // 1 segundo entre as opções
+const QUESTIONS_PER_GAME = 10;
+const REVEAL_DELAY = 1000;
 
 // Event listeners
 nextBtn.addEventListener('click', nextQuestion);
@@ -51,6 +48,9 @@ function initializeGame() {
     scoreTeamB = 0;
     questionsUsedIndices = [];
     currentQuestions = [];
+    
+    // Remover overlay se existir
+    resultsOverlay.classList.remove('active');
     
     // Selecionar perguntas aleatórias
     selectRandomQuestions();
@@ -115,8 +115,6 @@ function showQuestion() {
     const progress = ((currentQuestionIndex) / currentQuestions.length) * 100;
     quizProgress.value = progress;
     progressText.textContent = `Pergunta ${currentQuestionIndex + 1} de ${currentQuestions.length}`;
-    
-    
     
     // Exibir pergunta
     questionText.textContent = question.question;
@@ -213,7 +211,26 @@ function checkAnswer(selectedIndex) {
             showNotification("Resposta correta! Time Vermelho pontua!", "success");
         }
     } else {
-        showNotification(`Resposta incorreta! A correta era: ${question.options[question.correct]}`, "danger");
+        // RESPOSTA INCORRETA - TIME ADVERSÁRIO PONTUA
+        if (currentTeam === 'A') {
+            // Time Azul errou, Time Vermelho pontua
+            scoreTeamB++;
+            scoreTeamBElement.textContent = scoreTeamB;
+            scoreTeamBElement.parentElement.parentElement.classList.add('winner-animation');
+            setTimeout(() => {
+                scoreTeamBElement.parentElement.parentElement.classList.remove('winner-animation');
+            }, 1500);
+            showNotification(`Resposta incorreta! Time Vermelho pontua! A correta era: ${question.options[question.correct]}`, "danger");
+        } else {
+            // Time Vermelho errou, Time Azul pontua
+            scoreTeamA++;
+            scoreTeamAElement.textContent = scoreTeamA;
+            scoreTeamAElement.parentElement.parentElement.classList.add('winner-animation');
+            setTimeout(() => {
+                scoreTeamAElement.parentElement.parentElement.classList.remove('winner-animation');
+            }, 1500);
+            showNotification(`Resposta incorreta! Time Azul pontua! A correta era: ${question.options[question.correct]}`, "danger");
+        }
     }
     
     // Habilitar o botão de próxima pergunta
@@ -285,6 +302,8 @@ function endQuiz() {
     winnerAnnouncement.textContent = winnerText;
     finalScore.textContent = `Time Azul ${scoreTeamA} x ${scoreTeamB} Time Vermelho`;
     
+    // Mostrar overlay e resultados centralizados
+    resultsOverlay.classList.add('active');
     resultsContainer.classList.remove('hidden');
     nextBtn.disabled = true;
 }
@@ -292,4 +311,5 @@ function endQuiz() {
 function restartQuiz() {
     resetQuiz();
     resultsContainer.classList.add('hidden');
+    resultsOverlay.classList.remove('active');
 }

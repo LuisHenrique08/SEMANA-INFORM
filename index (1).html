@@ -6,243 +6,297 @@
     <title>Semana da Informática - Time Azul vs Time Vermelho</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
     <style>
         :root {
-    --team-a-color: #3498db;
-    --team-b-color: #e74c3c;
-    --dark-gray: #394147f7;
-    --medium-gray: #78818a;
-    --light-gray: #718096;
-    --lighter-gray: #e2e8f0;
-}
+            --team-a-color: #3498db;
+            --team-b-color: #e74c3c;
+            --dark-gray: #394147f7;
+            --medium-gray: #78818a;
+            --light-gray: #718096;
+            --lighter-gray: #e2e8f0;
+        }
 
-body {
-    background-color: var(--dark-gray);
-    min-height: 100vh;
-    padding: 20px;
-    font-size: 50px; /* Aumentando a fonte base */
-}
+        body {
+            background-color: var(--dark-gray);
+            min-height: 100vh;
+            padding: 20px;
+            font-size: 50px;
+        }
 
-.main-container {
-    max-width: 2800px;
-    margin: 0 auto;
-    background: var(--medium-gray);
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    overflow: hidden;
-}
+        .main-container {
+            max-width: 2800px;
+            margin: 0 auto;
+            background: var(--medium-gray);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
 
-.hero {
-    background-color: var(--medium-gray);
-    color: white;
-   
-}
+        .hero {
+            background-color: var(--medium-gray);
+            color: white;
+        }
 
-.header-title {
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-    color: white;
-    
-}
+        .header-title {
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            color: white;
+        }
 
-.team-card {
-    border-radius: 12px;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    background-color: var(--lighter-gray);
-}
+        .team-card {
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            background-color: var(--lighter-gray);
+        }
 
-.team-a {
-    border-bottom: 10px solid var(--team-a-color);
-}
+        .team-a {
+            border-bottom: 10px solid var(--team-a-color);
+        }
 
-.team-b {
-    border-bottom: 10px solid var(--team-b-color);
-}
+        .team-b {
+            border-bottom: 10px solid var(--team-b-color);
+        }
 
-.team-a .card-header-title {
-    color: var(--team-a-color);
-    font-size: 2.4rem; /* Aumentado */
-}
+        .team-a .card-header-title {
+            color: var(--team-a-color);
+            font-size: 2.4rem;
+        }
 
-.team-b .card-header-title {
-    color: var(--team-b-color);
-    font-size: 2.4rem; /* Aumentado */
-}
+        .team-b .card-header-title {
+            color: var(--team-b-color);
+            font-size: 2.4rem;
+        }
 
-.score {
-    font-size: 3.0 rem; /* Aumentado */
-    font-weight: bold;
-}
+        .score {
+            font-size: 3.0rem;
+            font-weight: bold;
+        }
 
-.question-card {
-    margin: 30px 0;
-    border-radius: 12px;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease;
-    background: var(--lighter-gray);
-}
+        .question-card {
+            margin: 30px 0;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+            background: var(--lighter-gray);
+        }
 
-.question-card:hover {
-    transform: translateY(-5px);
-}
+        .question-card:hover {
+            transform: translateY(-5px);
+        }
 
-.options-container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
-    margin-top: 20px;
-}
+        .options-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
 
-@media (max-width: 768px) {
-    .options-container {
-        grid-template-columns: 1fr;
-    }
-}
+        @media (max-width: 768px) {
+            .options-container {
+                grid-template-columns: 1fr;
+            }
+        }
 
-.option-btn {
-    transition: all 0.2s ease;
-    height: 100%;
-    border: 2px solid transparent;
-    background-color: white;
-    font-size: 2.4rem; /* Aumentado */
-}
+        .option-btn {
+            transition: all 0.2s ease;
+            height: 100%;
+            border: 2px solid transparent;
+            background-color: white;
+            font-size: 2.4rem;
+        }
 
-.option-btn:hover {
-    transform: scale(1.03);
-}
+        .option-btn:hover {
+            transform: scale(1.03);
+        }
 
-.correct {
-    background-color: #48c78e !important;
-    color: white !important;
-    border-color: #38a67c !important;
-}
+        .correct {
+            background-color: #48c78e !important;
+            color: white !important;
+            border-color: #38a67c !important;
+        }
 
-.incorrect {
-    background-color: #f14668 !important;
-    color: white !important;
-    border-color: #d13654 !important;
-}
+        .incorrect {
+            background-color: #f14668 !important;
+            color: white !important;
+            border-color: #d13654 !important;
+        }
 
-.progress-bar {
-    margin: 20px 0;
-    height: 10px;
-    border-radius: 5px;
-}
+        .progress-bar {
+            margin: 20px 0;
+            height: 10px;
+            border-radius: 5px;
+        }
 
-.winner-animation {
-    animation: pulse 1.5s infinite;
-}
+        .winner-animation {
+            animation: pulse 1.5s infinite;
+        }
 
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
-}
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
 
-.category-tag {
-    margin-bottom: 15px;
-    font-size: 1.1rem; /* Aumentado */
-}
+        .category-tag {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
 
-.question-counter {
-    
-    color: var(--lighter-gray);
-    font-size: 2.0rem; /* Aumentado */
-}
+        .question-counter {
+            color: var(--lighter-gray);
+            font-size: 2.0rem;
+        }
 
-.team-selector {
-    display: flex;
-    justify-content: center;
-    margin: 20px 0;
-    gap: 20px;
-}
+        .team-selector {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+            gap: 20px;
+        }
 
-.team-btn {
-    font-size: 2.4rem; /* Aumentado */
-    padding: 15px 30px;
-    transition: all 0.3s ease;
-}
+        .team-btn {
+            font-size: 2.4rem;
+            padding: 15px 30px;
+            transition: all 0.3s ease;
+        }
 
-.team-btn.active {
-    transform: scale(1.05);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-}
+        .team-btn.active {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
 
-.option-reveal {
-    animation: fadeIn 0.5s ease-out;
-}
+        .option-reveal {
+            animation: fadeIn 0.5s ease-out;
+        }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-.floating-notification {
+        .floating-notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .option-letter {
+            display: inline-block;
+            width: 35px;
+            height: 35px;
+            line-height: 35px;
+            text-align: center;
+            background: #485fc7;
+            color: white;
+            border-radius: 50%;
+            margin-right: 10px;
+            font-size: 1.5rem;
+        }
+
+        .vs-box .tag {
+            background-color: var(--medium-gray);
+            color: white;
+            border: 2px solid var(--lighter-gray);
+            font-size: 5.0rem;
+        }
+
+        .subtitle {
+            color: var(--lighter-gray);
+            font-size: 2.0rem;
+        }
+
+        .title {
+            color: #2d3748;
+        }
+
+        .title.is-1 {
+            font-size: 4.0rem;
+        }
+
+        .title.is-3 {
+            font-size: 3.4rem;
+        }
+
+        .card-content {
+            color: #2d3748;
+        }
+
+        .button {
+            font-size: 2.4rem;
+        }
+
+        .button.is-large {
+            font-size: 2.3rem;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+/* Estilos para os resultados centralizados - AUMENTADOS */
+#results-container {
     position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 100;
-    animation: slideIn 0.5s ease-out;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    width: 90%; /* Aumentado de 80% para 90% */
+    max-width: 800px; /* Aumentado de 600px para 800px */
+    background: #394147f7;
+    border-radius: 20px; /* Aumentado de 15px para 20px */
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6); /* Sombra mais intensa */
+    padding: 40px; /* Aumentado de 30px para 40px */
 }
 
-@keyframes slideIn {
-    from { transform: translateX(100px); opacity: 0; }
-    to { transform: translateX(0); opacity: 1; }
-}
-
-.option-letter {
-    display: inline-block;
-    width: 35px; /* Aumentado */
-    height: 35px; /* Aumentado */
-    line-height: 35px; /* Ajustado */
-    text-align: center;
-    background: #485fc7;
-    color: white;
-    border-radius: 50%;
-    margin-right: 10px;
-    font-size: 1.5rem; /* Aumentado */
-}
-
-.vs-box .tag {
-    background-color: var(--medium-gray);
-    color: white;
-    border: 2px solid var(--lighter-gray);
-    font-size: 5.0rem; /* Aumentado */
-}
-
-.subtitle {
-    color: var(--lighter-gray);
-    font-size: 2.0rem; /* Aumentado */
-}
-
-.title {
-    color: #2d3748;
-}
-
-.title.is-1 {
+/* Aumentar o tamanho dos textos dentro dos resultados */
+#results-container .title.is-3 {
     font-size: 4.0rem; /* Aumentado */
+    margin-bottom: 30px;
 }
 
-.title.is-3 {
-    font-size: 3.4rem; /* Aumentado */
+#results-container .title.is-1 {
+    font-size: 5.0rem; /* Aumentado */
+    margin-bottom: 20px;
 }
 
-.card-content {
-    color: #2d3748;
+#results-container .subtitle {
+    font-size: 3.0rem; /* Aumentado */
+    margin-bottom: 40px;
 }
 
-.button {
-    font-size: 2.4rem; /* Aumentado */
+#results-container .button.is-large {
+    font-size: 3.0rem; /* Aumentado */
+    padding: 25px 40px; /* Aumentado */
+    height: auto;
 }
 
-.button.is-large {
-    font-size: 2.3rem; /* Aumentado */
+/* Aumentar o tamanho da notificação dentro dos resultados */
+#results-container .notification.is-info {
+    padding: 40px; /* Aumentado */
+    border-radius: 15px;
 }
 
-.hidden {
-    display: none !important;
-}
+        .results-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 999;
+            display: none;
+        }
+
+        .results-overlay.active {
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -312,11 +366,9 @@ body {
         <div id="question-area" class="section">
             <div class="card question-card">
                 <div class="card-content">
-                    
                     <p class="title is-3 has-text-centered" id="question-text">
                         Carregando perguntas...
                     </p>
-                    
                     <div class="options-container" id="options-container">
                         <!-- Opções serão inseridas via JavaScript -->
                     </div>
@@ -332,7 +384,7 @@ body {
                 </button>
             </p>
             <p class="control">
-X
+                X
             </p>
             <p class="control">
                 <button id="reset-btn" class="button is-large is-danger">
@@ -354,7 +406,22 @@ X
         </div>  
     </div>
 
+    <div class="results-overlay"></div>
+
     <script src="function.js"></script>
     <script src="question.js"></script>
+    
+    <script>
+        // Configuração do overlay
+        document.addEventListener('DOMContentLoaded', function() {
+            const overlay = document.querySelector('.results-overlay');
+            
+            // Fechar resultados ao clicar no overlay
+            overlay.addEventListener('click', function() {
+                document.getElementById('results-container').classList.add('hidden');
+                overlay.classList.remove('active');
+            });
+        });
+    </script>
 </body>
 </html>
