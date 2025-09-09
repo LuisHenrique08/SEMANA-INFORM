@@ -26,7 +26,7 @@ const resultsOverlay = document.querySelector('.results-overlay');
 
 // Configurações
 const QUESTIONS_PER_GAME = 10;
-const REVEAL_DELAY = 1000;
+const REVEAL_DELAY = 3000;
 
 // Event listeners
 nextBtn.addEventListener('click', nextQuestion);
