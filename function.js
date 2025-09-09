@@ -166,7 +166,7 @@ function selectTeam(team) {
     }
     
     // Mostrar notificação
-    showNotification(`Time ${team === 'A' ? 'Azul' : 'Vermelho'} selecionado para responder!`);
+    showNotification(`Time ${team === 'A' ? 'Verde' : 'Amarelo'} selecionado para responder!`);
 }
 
 function checkAnswer(selectedIndex) {
@@ -200,7 +200,7 @@ function checkAnswer(selectedIndex) {
             setTimeout(() => {
                 scoreTeamAElement.parentElement.parentElement.classList.remove('winner-animation');
             }, 1500);
-            showNotification("Resposta correta! Time Azul pontua!", "success");
+            showNotification("Resposta correta! Time Verde pontua!", "success");
         } else {
             scoreTeamB++;
             scoreTeamBElement.textContent = scoreTeamB;
@@ -208,7 +208,7 @@ function checkAnswer(selectedIndex) {
             setTimeout(() => {
                 scoreTeamBElement.parentElement.parentElement.classList.remove('winner-animation');
             }, 1500);
-            showNotification("Resposta correta! Time Vermelho pontua!", "success");
+            showNotification("Resposta correta! Time Amarelo pontua!", "success");
         }
     } else {
         // RESPOSTA INCORRETA - TIME ADVERSÁRIO PONTUA
@@ -220,7 +220,7 @@ function checkAnswer(selectedIndex) {
             setTimeout(() => {
                 scoreTeamBElement.parentElement.parentElement.classList.remove('winner-animation');
             }, 1500);
-            showNotification(`Resposta incorreta! Time Vermelho pontua! A correta era: ${question.options[question.correct]}`, "danger");
+            showNotification(`Resposta incorreta! Time Amarelo pontua! A correta era: ${question.options[question.correct]}`, "danger");
         } else {
             // Time Vermelho errou, Time Azul pontua
             scoreTeamA++;
@@ -229,7 +229,7 @@ function checkAnswer(selectedIndex) {
             setTimeout(() => {
                 scoreTeamAElement.parentElement.parentElement.classList.remove('winner-animation');
             }, 1500);
-            showNotification(`Resposta incorreta! Time Azul pontua! A correta era: ${question.options[question.correct]}`, "danger");
+            showNotification(`Resposta incorreta! Time Verde pontua! A correta era: ${question.options[question.correct]}`, "danger");
         }
     }
     
@@ -292,15 +292,15 @@ function endQuiz() {
     // Determinar o vencedor
     let winnerText = "";
     if (scoreTeamA > scoreTeamB) {
-        winnerText = "Time Azul Venceu!";
+        winnerText = "Time Verde Venceu!";
     } else if (scoreTeamB > scoreTeamA) {
-        winnerText = "Time Vermelho Venceu!";
+        winnerText = "Time Amarelo Venceu!";
     } else {
         winnerText = "Empate!";
     }
     
     winnerAnnouncement.textContent = winnerText;
-    finalScore.textContent = `Time Azul ${scoreTeamA} x ${scoreTeamB} Time Vermelho`;
+    finalScore.textContent = `Time Verde ${scoreTeamA} x ${scoreTeamB} Time Amarelo`;
     
     // Mostrar overlay e resultados centralizados
     resultsOverlay.classList.add('active');

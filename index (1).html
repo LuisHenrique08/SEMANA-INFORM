@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Semana da Informática - Time Azul vs Time Vermelho</title>
+    <title>Semana da Informática - Time Verde vs Time Amarelo</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --team-a-color: #3498db;
-            --team-b-color: #e74c3c;
+            --team-a-color: #3ce76a;
+            --team-b-color: #e6e956;
             --dark-gray: #394147f7;
             --medium-gray: #78818a;
             --light-gray: #718096;
@@ -17,7 +17,7 @@
         }
 
         body {
-            background-color: var(--dark-gray);
+            background-color: var(--dark-gray); 
             min-height: 100vh;
             padding: 20px;
             font-size: 50px;
@@ -213,7 +213,7 @@
         }
 
         .title {
-            color: #2d3748;
+            color: #000000;
         }
 
         .title.is-1 {
@@ -240,48 +240,48 @@
             display: none !important;
         }
 
-/* Estilos para os resultados centralizados - AUMENTADOS */
-#results-container {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1000;
-    width: 90%; /* Aumentado de 80% para 90% */
-    max-width: 800px; /* Aumentado de 600px para 800px */
-    background: #394147f7;
-    border-radius: 20px; /* Aumentado de 15px para 20px */
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6); /* Sombra mais intensa */
-    padding: 40px; /* Aumentado de 30px para 40px */
-}
+        /* Estilos para os resultados centralizados - AUMENTADOS */
+        #results-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+            width: 90%; /* Aumentado de 80% para 90% */
+            max-width: 800px; /* Aumentado de 600px para 800px */
+            background: #394147f7;
+            border-radius: 20px; /* Aumentado de 15px para 20px */
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6); /* Sombra mais intensa */
+            padding: 40px; /* Aumentado de 30px para 40px */
+        }
 
-/* Aumentar o tamanho dos textos dentro dos resultados */
-#results-container .title.is-3 {
-    font-size: 4.0rem; /* Aumentado */
-    margin-bottom: 30px;
-}
+        /* Aumentar o tamanho dos textos dentro dos resultados */
+        #results-container .title.is-3 {
+            font-size: 4.0rem; /* Aumentado */
+            margin-bottom: 30px;
+        }
 
-#results-container .title.is-1 {
-    font-size: 5.0rem; /* Aumentado */
-    margin-bottom: 20px;
-}
+        #results-container .title.is-1 {
+            font-size: 5.0rem; /* Aumentado */
+            margin-bottom: 20px;
+        }
 
-#results-container .subtitle {
-    font-size: 3.0rem; /* Aumentado */
-    margin-bottom: 40px;
-}
+        #results-container .subtitle {
+            font-size: 3.0rem; /* Aumentado */
+            margin-bottom: 40px;
+        }
 
-#results-container .button.is-large {
-    font-size: 3.0rem; /* Aumentado */
-    padding: 25px 40px; /* Aumentado */
-    height: auto;
-}
+        #results-container .button.is-large {
+            font-size: 3.0rem; /* Aumentado */
+            padding: 25px 40px; /* Aumentado */
+            height: auto;
+        }
 
-/* Aumentar o tamanho da notificação dentro dos resultados */
-#results-container .notification.is-info {
-    padding: 40px; /* Aumentado */
-    border-radius: 15px;
-}
+        /* Aumentar o tamanho da notificação dentro dos resultados */
+        #results-container .notification.is-info {
+            padding: 40px; /* Aumentado */
+            border-radius: 15px;
+        }
 
         .results-overlay {
             position: fixed;
@@ -297,6 +297,15 @@
         .results-overlay.active {
             display: block;
         }
+
+        /* Estilos para centralizar os botões */
+        .buttons-center {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 20px 0;
+        }
     </style>
 </head>
 <body>
@@ -307,7 +316,7 @@
                 <h1 class="title is-1 header-title">
                     <i class="fas fa-trophy"></i> Semana da Informática
                 </h1>
-                <p class="subtitle">Time Azul vs Time Vermelho</p>
+                <p class="subtitle">Time Verde vs Time Amarelo</p>
             </div>
         </section>
 
@@ -317,7 +326,7 @@
                 <div class="card team-card team-a">
                     <div class="card-header">
                         <p class="card-header-title">
-                            <i class="fas fa-users"></i> &nbsp; Time Azul
+                            <i class="fas fa-users"></i> &nbsp; Time Verde
                         </p>
                     </div>
                     <div class="card-content">
@@ -336,7 +345,7 @@
                 <div class="card team-card team-b">
                     <div class="card-header">
                         <p class="card-header-title">
-                            <i class="fas fa-users"></i> &nbsp; Time Vermelho
+                            <i class="fas fa-users"></i> &nbsp; Time Amarelo
                         </p>
                     </div>
                     <div class="card-content">
@@ -346,13 +355,13 @@
             </div>
         </div>
 
-        <!-- Seletor de Time -->
-        <div class="team-selector">
-            <button id="team-a-btn" class="button is-large team-btn is-info">
-                <i class="fas fa-user-circle"></i> &nbsp; Time Azul Responde
+        <!-- Seletor de Time - CENTRALIZADO -->
+        <div class="buttons-center">
+            <button id="team-a-btn" class="button is-large is-success">
+                <i class="fas fa-user-circle"></i> &nbsp; Time Verde Responde
             </button>
-            <button id="team-b-btn" class="button is-large team-btn is-danger">
-                <i class="fas fa-user-circle"></i> &nbsp; Time Vermelho Responde
+            <button id="team-b-btn" class="button is-large is-warning">
+                <i class="fas fa-user-circle"></i> &nbsp; Time Amarelo Responde
             </button>
         </div>
 
@@ -398,7 +407,7 @@
             <h2 class="title is-3">Resultado Final</h2>
             <div class="notification is-info">
                 <p class="title is-1" id="winner-announcement">Empate!</p>
-                <p class="subtitle" id="final-score">Time Azul 0 x 0 Time Vermelho</p>
+                <p class="subtitle" id="final-score">Time Verde 0 x 0 Time Amarelo</p>
             </div>
             <button id="restart-btn" class="button is-warning is-large">
                 <i class="fas fa-redo"></i> &nbsp; Jogar Novamente
