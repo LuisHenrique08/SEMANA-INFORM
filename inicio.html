@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Passa ou Repassa - Semana da Informática</title>
+    <title>Semana da Informática</title>
     <style>
         * {
             margin: 0;
@@ -13,254 +13,204 @@
         }
         
         body {
-            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
-            color: white;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            text-align: center;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
         }
         
         .container {
-            max-width: 900px;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            animation: fadeIn 1s ease;
+            max-width: 2800px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
         
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        header {
+            background: linear-gradient(135deg, #2c3e50, #1a2530);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
         
-        h1 {
-            font-size: 3.5rem;
-            margin-bottom: 15px;
-            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
-            color: #fff;
-            background: linear-gradient(to right, #4CAF50, #FFC107);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
         }
         
-        .subtitle {
-            font-size: 1.5rem;
-            margin-bottom: 30px;
-            color: #e0e0e0;
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
         }
         
-        .school-name {
-            font-size: 2rem;
-            margin-bottom: 40px;
-            color: #ffeb3b;
-            font-weight: bold;
-            text-shadow: 0 0 10px rgba(255, 235, 59, 0.5);
+        nav {
+            background-color: #34495e;
+            padding: 1rem 0;
         }
         
-        .teams-section {
+        nav ul {
             display: flex;
-            justify-content: space-around;
-            margin: 40px 0;
-            flex-wrap: wrap;
+            justify-content: center;
+            list-style: none;
         }
         
-        .team {
-            width: 250px;
-            padding: 25px;
-            border-radius: 20px;
-            margin: 15px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease;
+        nav ul li {
+            margin: 0 15px;
         }
         
-        .team:hover {
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #3498db;
+        }
+        
+        section {
+            padding: 3rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #2c3e50;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: #3498db;
+            margin: 10px auto;
+        }
+        
+        .intro {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .rules {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .rules ol {
+            margin-left: 1.5rem;
+        }
+        
+        .rules li {
+            margin-bottom: 1rem;
+            padding-left: 0.5rem;
+        }
+        
+        .work-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .work-item {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .work-item:hover {
             transform: translateY(-5px);
         }
         
-        .team-green {
-            background: linear-gradient(to bottom, #4CAF50, #2E7D32);
-            border: 2px solid #81C784;
+        .work-item-content {
+            padding: 1.5rem;
         }
         
-        .team-yellow {
-            background: linear-gradient(to bottom, #FFC107, #FF8F00);
-            border: 2px solid #FFD54F;
+        .work-item h3 {
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
         }
         
-        .team-title {
-            font-size: 1.8rem;
-            margin-bottom: 15px;
-            font-weight: bold;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
-        }
-        
-        .team-icon {
-            font-size: 3.5rem;
-            margin-bottom: 15px;
-        }
-        
-        .rules-section {
-            background: rgba(255, 255, 255, 0.15);
-            padding: 30px;
-            border-radius: 20px;
-            margin: 40px 0;
-            text-align: left;
-            border-left: 5px solid #4CAF50;
-        }
-        
-        .rules-title {
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-            color: #4CAF50;
-            text-align: center;
-        }
-        
-        .rules-list {
-            list-style-type: none;
-        }
-        
-        .rules-list li {
-            margin-bottom: 15px;
-            padding-left: 30px;
-            position: relative;
-            font-size: 1.1rem;
-            line-height: 1.5;
-        }
-        
-        .rules-list li:before {
-            content: "•";
-            color: #FFC107;
-            font-size: 1.5rem;
-            position: absolute;
-            left: 0;
-            top: -3px;
-        }
-        
-        .start-button {
-            background: linear-gradient(to right, #4CAF50, #2E7D32);
+        footer {
+            background-color: #2c3e50;
             color: white;
-            border: none;
-            padding: 18px 50px;
-            font-size: 1.4rem;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
-            font-weight: bold;
-            margin-top: 30px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .start-button:after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: rgba(255, 255, 255, 0.1);
-            transform: rotate(30deg);
-            transition: all 0.5s ease;
-        }
-        
-        .start-button:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
-        }
-        
-        .start-button:hover:after {
-            transform: rotate(30deg) translate(20%, 20%);
-        }
-        
-        .footer {
-            margin-top: 40px;
-            font-size: 1rem;
-            opacity: 0.8;
-            color: #bdbdbd;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 2rem;
         }
         
         @media (max-width: 768px) {
-            h1 {
-                font-size: 2.5rem;
+            nav ul {
+                flex-direction: column;
+                align-items: center;
             }
             
-            .school-name {
-                font-size: 1.5rem;
+            nav ul li {
+                margin: 5px 0;
             }
             
-            .team {
-                width: 100%;
-                max-width: 300px;
-            }
-            
-            .rules-section {
-                padding: 20px;
-            }
-            
-            .start-button {
-                padding: 15px 40px;
-                font-size: 1.2rem;
+            .work-showcase {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>PASSA OU REPASSA</h1>
-        
-        <div class="subtitle">Jogo de Conhecimentos - Semana da Informática</div>
-        
-        <div class="school-name">ESCOLA TÉCNICA ESTADUAL</div>
-        
-        <div class="teams-section">
-            <div class="team team-green">
-                <div class="team-icon">🏆</div>
-                <div class="team-title">TIME VERDE</div>
-                <div class="team-desc">Conhecimento e estratégia</div>
-            </div>
-            
-            <div class="team team-yellow">
-                <div class="team-icon">⚡</div>
-                <div class="team-title">TIME AMARELO</div>
-                <div class="team-desc">Rapidez e precisão</div>
-            </div>
+    <header>
+        <div class="container">
+            <h1>Semana da Informática</h1>
+            <p>Bem-vindo ao nosso Jogo - Semana da Informática</p>
         </div>
-        
-        <div class="rules-section">
-            <h2 class="rules-title">REGRAS DO JOGO</h2>
-            <ul class="rules-list">
-                <li>Dois times competem respondendo perguntas sobre informática</li>
-                <li>Cada pergunta tem um tempo limite para resposta</li>
-                <li>O time que acertar a resposta ganha pontos</li>
-                <li>Se um time não souber a resposta, pode "passar" para o outro time</li>
-                <li>O time que recebe a pergunta "repassada" pode tentar respondê-la</li>
-                <li>Vence o time que acumular mais pontos ao final de todas as perguntas</li>
+    </header>
+    
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="index (1).html">Ir para o Jogo</a></li>
+
             </ul>
         </div>
+    </nav>
+    
+    <div class="container">
+        <section id="sobre">
+            <h2 class="section-title">Sobre o nosso Jogo</h2>
+            <div class="intro">
+                <p>Criamos o Jogo com intuito de testar nossos conhecimentos básicos</p>
+                <p>A intenção é que vença o melhor de forma competitiva!</p>
+            </div>
+        </section>
         
-        <button class="start-button" onclick="iniciarJogo()">INICIAR JOGO</button>
-        
-        <div class="footer">
-            Desenvolvido para a Semana da Informática | 2023
-        </div>
-    </div>
+        <section id="regras">
+            <h2 class="section-title">Regras do Jogo</h2>
+            <div class="rules">
+                <ol>
+                    <li>O time mais rápido tem direito de responder antes.</li>
+                    <li>Se errar a pergunta, é somado ponto para o time adversário.</li>
+                    <li>Em caso de empate, iremos refazer o jogo.</li>
+                    <li>Temos Perguntas sobre informática básica, tecnologia, programação e etc.</li>
 
-    <script>
-        function iniciarJogo() {
-            // Redireciona para a página do jogo
-            alert("Redirecionando para o jogo...");
-            // window.location.href = "seu_jogo.html"; // Descomente e coloque o URL correto
-        }
-    </script>
+
+                </ol>
+            </div>
+        </section>
+
+    
+    <footer id="contato">
+        <div class="container">
+            <p>Desenvolvido por [Millena, Pajé, Kruger e Macauli] • [2025]</p>
+            <p>Matéria de Análise e Projeto</p>
+
+        </div>
+    </footer>
 </body>
 </html>
