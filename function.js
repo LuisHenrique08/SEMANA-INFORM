@@ -26,7 +26,7 @@ const resultsOverlay = document.querySelector('.results-overlay');
 
 // Configurações
 const QUESTIONS_PER_GAME = 10;
-const REVEAL_DELAY = 3000;
+const REVEAL_DELAY = 2000; // 2 segundos entre as alternativas
 
 // Event listeners
 nextBtn.addEventListener('click', nextQuestion);
@@ -111,6 +111,9 @@ function showQuestion() {
 
     const question = currentQuestions[currentQuestionIndex];
     
+    // 🎵 tocar música Show do Milhão (2 segundos)
+    tocarMusica();
+    
     // Atualizar progresso
     const progress = ((currentQuestionIndex) / currentQuestions.length) * 100;
     quizProgress.value = progress;
@@ -128,12 +131,19 @@ function showQuestion() {
     teamABtn.classList.remove('active');
     teamBBtn.classList.remove('active');
     
+    // Desabilitar botões de time inicialmente
+    teamABtn.disabled = true;
+    teamBBtn.disabled = true;
+    
     // Revelar opções automaticamente com um intervalo
     revealOptionsAutomatically(question);
 }
 
 function revealOptionsAutomatically(question) {
-    // Revelar todas as opções com um intervalo
+    // Limpar completamente o container de opções
+    optionsContainer.innerHTML = '';
+    
+    // Revelar todas as opções com um intervalo de 2 segundos
     question.options.forEach((option, index) => {
         setTimeout(() => {
             // Criar botão para a opção
@@ -147,6 +157,14 @@ function revealOptionsAutomatically(question) {
             
             // Adicionar ao container
             optionsContainer.appendChild(button);
+            
+            // Habilitar botões de time após a última opção ser revelada
+            if (index === question.options.length - 1) {
+                setTimeout(() => {
+                    teamABtn.disabled = false;
+                    teamBBtn.disabled = false;
+                }, 500);
+            }
         }, REVEAL_DELAY * index);
     });
 }
@@ -181,6 +199,10 @@ function checkAnswer(selectedIndex) {
         btn.disabled = true;
     });
     
+    // Desabilitar botões de time
+    teamABtn.disabled = true;
+    teamBBtn.disabled = true;
+    
     // Marcar resposta correta e incorreta
     options.forEach((btn, index) => {
         if (index === question.correct) {
@@ -213,7 +235,7 @@ function checkAnswer(selectedIndex) {
     } else {
         // RESPOSTA INCORRETA - TIME ADVERSÁRIO PONTUA
         if (currentTeam === 'A') {
-            // Time Azul errou, Time Vermelho pontua
+            // Time Verde errou, Time Amarelo pontua
             scoreTeamB++;
             scoreTeamBElement.textContent = scoreTeamB;
             scoreTeamBElement.parentElement.parentElement.classList.add('winner-animation');
@@ -222,7 +244,7 @@ function checkAnswer(selectedIndex) {
             }, 1500);
             showNotification(`Resposta incorreta! Time Amarelo pontua! A correta era: ${question.options[question.correct]}`, "danger");
         } else {
-            // Time Vermelho errou, Time Azul pontua
+            // Time Amarelo errou, Time Verde pontua
             scoreTeamA++;
             scoreTeamAElement.textContent = scoreTeamA;
             scoreTeamAElement.parentElement.parentElement.classList.add('winner-animation');
@@ -312,4 +334,34 @@ function restartQuiz() {
     resetQuiz();
     resultsContainer.classList.add('hidden');
     resultsOverlay.classList.remove('active');
+}
+
+// 🎵 Função para tocar música Show do Milhão (2 segundos)
+function tocarMusica() {
+    const audio = document.getElementById("milhaoAudio");
+    if (!audio) return; // se não tiver o elemento, não faz nada
+
+    // reinicia e tenta tocar; se o navegador bloquear, não quebra o fluxo
+    try {
+        audio.currentTime = 0;
+        const playPromise = audio.play();
+        if (playPromise !== undefined) {
+            playPromise.catch(err => {
+                // Autoplay pode ser bloqueado — só avisamos no console
+                console.warn('audio.play() falhou:', err);
+            });
+        }
+    } catch (e) {
+        console.warn('Erro ao tentar tocar áudio:', e);
+    }
+
+    // para automaticamente em 2 segundos
+    setTimeout(() => {
+        try {
+            audio.pause();
+            audio.currentTime = 0;
+        } catch (e) {
+            console.warn('Erro ao pausar áudio:', e);
+        }
+    }, 2000);
 }
